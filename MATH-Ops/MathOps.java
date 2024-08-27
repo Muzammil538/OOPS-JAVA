@@ -1,3 +1,9 @@
+/**
+ * The `MathOps` class contains methods for performing various mathematical operations such as
+ * addition, subtraction, multiplication, division, finding maximum and minimum values, calculating
+ * areas, solving quadratic equations, and computing factorials.
+ */
+
 class MathOps {
   // two vairable operations
   int sum(int a, int b){
