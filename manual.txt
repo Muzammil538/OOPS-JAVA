@@ -1,0 +1,269 @@
+### Lab 5: 
+
+#### 1. Write a Java program to demonstrate Access Modifiers in Java
+
+**1. Problem description:**  
+Demonstrate the usage of access modifiers (private, protected, public, default) in Java.
+
+**2. Problem analysis:**  
+Access modifiers control the visibility and accessibility of classes, methods, and variables. Understanding their usage is essential for encapsulation and modular design.
+
+**3. Sample input and output**  
+**Input:** N/A  
+**Output:** Displays accessibility of members based on their access modifier.
+
+**4. Algorithm:**
+1. Create a class with members having different access modifiers: private, protected, public, and default.
+2. Create another class in the same package and another class in a different package.
+3. Attempt to access the members from both classes and observe the results.
+
+**5. Code:**
+
+```java
+// File: AccessModifiersDemo.java
+package demo;
+
+public class AccessModifiersDemo {
+    private int privateVar = 10;
+    protected int protectedVar = 20;
+    int defaultVar = 30;
+    public int publicVar = 40;
+    
+    public static void main(String[] args) {
+        AccessModifiersDemo obj = new AccessModifiersDemo();
+        System.out.println("Private Var: " + obj.privateVar);
+        System.out.println("Protected Var: " + obj.protectedVar);
+        System.out.println("Default Var: " + obj.defaultVar);
+        System.out.println("Public Var: " + obj.publicVar);
+    }
+}
+
+// File: AccessTest.java (same package)
+package demo;
+
+public class AccessTest {
+    public static void main(String[] args) {
+        AccessModifiersDemo obj = new AccessModifiersDemo();
+        // System.out.println("Private Var: " + obj.privateVar); // Compile-time error
+        System.out.println("Protected Var: " + obj.protectedVar);
+        System.out.println("Default Var: " + obj.defaultVar);
+        System.out.println("Public Var: " + obj.publicVar);
+    }
+}
+
+// File: DifferentPackageTest.java (different package)
+package other;
+
+import demo.AccessModifiersDemo;
+
+public class DifferentPackageTest {
+    public static void main(String[] args) {
+        AccessModifiersDemo obj = new AccessModifiersDemo();
+        // System.out.println("Private Var: " + obj.privateVar); // Compile-time error
+        // System.out.println("Protected Var: " + obj.protectedVar); // Compile-time error
+        // System.out.println("Default Var: " + obj.defaultVar); // Compile-time error
+        System.out.println("Public Var: " + obj.publicVar);
+    }
+}
+```
+
+**6. 2 test cases (input and output)**  
+**Test Case 1:**  
+**Input:** N/A  
+**Expected Output:**
+```
+Private Var: 10
+Protected Var: 20
+Default Var: 30
+Public Var: 40
+```
+
+**Test Case 2:**  
+**Input:** N/A  
+**Expected Output:**
+```
+Protected Var: 20
+Default Var: 30
+Public Var: 40
+```
+
+#### 2. Write a program to demonstrate multilevel inheritance
+
+**1. Problem description:**  
+Demonstrate multilevel inheritance in Java.
+
+**2. Problem analysis:**  
+Multilevel inheritance occurs when a class inherits from a class that is also a child of another class, forming a hierarchy.
+
+**3. Sample input and output**  
+**Input:** N/A  
+**Output:** Displays the properties inherited across multiple levels of inheritance.
+
+**4. Algorithm:**
+1. Create a base class with some properties and methods.
+2. Create a derived class that inherits from the base class and adds more properties and methods.
+3. Create another class that inherits from the derived class and demonstrates access to properties and methods across multiple levels.
+
+**5. Code:**
+
+```java
+// Base class
+class Animal {
+    void eat() {
+        System.out.println("Eating...");
+    }
+}
+
+// Derived class
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking...");
+    }
+}
+
+// Further derived class
+class BabyDog extends Dog {
+    void weep() {
+        System.out.println("Weeping...");
+    }
+}
+
+public class MultilevelInheritanceDemo {
+    public static void main(String[] args) {
+        BabyDog babyDog = new BabyDog();
+        babyDog.weep();
+        babyDog.bark();
+        babyDog.eat();
+    }
+}
+```
+
+**6. 2 test cases (input and output)**  
+**Test Case 1:**  
+**Input:** N/A  
+**Expected Output:**
+```
+Weeping...
+Barking...
+Eating...
+```
+
+**Test Case 2:**  
+**Input:** Modify the `Dog` class to include a new method `run()`.  
+**Expected Output:**
+```
+Weeping...
+Barking...
+Running...
+Eating...
+```
+
+### Lab 6:
+
+#### 1. Write a Java program to demonstrate dynamic method dispatch
+
+**1. Problem description:**  
+Demonstrate dynamic method dispatch in Java.
+
+**2. Problem analysis:**  
+Dynamic method dispatch allows Java to call overridden methods at runtime, based on the actual object type, not the reference type.
+
+**3. Sample input and output**  
+**Input:** N/A  
+**Output:** The overridden method of the subclass is called at runtime.
+
+**4. Algorithm:**
+1. Create a superclass with a method.
+2. Create a subclass that overrides the method.
+3. Use a superclass reference to hold a subclass object and call the method.
+
+**5. Code:**
+
+```java
+class A {
+    void display() {
+        System.out.println("Class A Display");
+    }
+}
+
+class B extends A {
+    @Override
+    void display() {
+        System.out.println("Class B Display");
+    }
+}
+
+public class DynamicDispatchDemo {
+    public static void main(String[] args) {
+        A obj = new B();  // Reference of type A but object of type B
+        obj.display();    // Calls B's display method due to dynamic dispatch
+    }
+}
+```
+
+**6. 2 test cases (input and output)**  
+**Test Case 1:**  
+**Input:** N/A  
+**Expected Output:**
+```
+Class B Display
+```
+
+**Test Case 2:**  
+**Input:** Change the reference to `A obj = new A();`.  
+**Expected Output:**
+```
+Class A Display
+```
+
+#### 2. Write a program to demonstrate a final variable
+
+**1. Problem description:**  
+Demonstrate the usage of a `final` variable in Java.
+
+**2. Problem analysis:**  
+A `final` variable is a constant and cannot be reassigned after it is initialized. It is used to define constants.
+
+**3. Sample input and output**  
+**Input:** N/A  
+**Output:** The program should compile and run without errors, showing that the final variable cannot be reassigned.
+
+**4. Algorithm:**
+1. Declare a `final` variable and initialize it.
+2. Attempt to reassign the `final` variable and observe the compile-time error (if reassigning).
+3. Use the `final` variable in a method to demonstrate its immutability.
+
+**5. Code:**
+
+```java
+public class FinalVariableDemo {
+    public static void main(String[] args) {
+        final int MAX_VALUE = 100;
+        System.out.println("Max Value: " + MAX_VALUE);
+
+        // Uncommenting the following line will cause a compile-time error
+        // MAX_VALUE = 200; 
+
+        useFinalVariable(MAX_VALUE);
+    }
+
+    static void useFinalVariable(final int value) {
+        System.out.println("Using final variable: " + value);
+        // value = 300; // Compile-time error
+    }
+}
+```
+
+**6. 2 test cases (input and output)**  
+**Test Case 1:**  
+**Input:** N/A  
+**Expected Output:**
+```
+Max Value: 100
+Using final variable: 100
+```
+
+**Test Case 2:**  
+**Input:** Uncomment the line `MAX_VALUE = 200;`.  
+**Expected Output:**  
+Compilation error: `Cannot assign a value to final variable 'MAX_VALUE'`
